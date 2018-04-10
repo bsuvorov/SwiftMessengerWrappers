@@ -2,41 +2,7 @@ import Foundation
 import Jay
 import HTTP
 
-public class PayloadHelper {
-    public static func getHostName() -> String {
-        let key = "bot_host_name"
-        let token = drop.config["appkeys", key]?.string
-        if token == nil {
-            analytics?.logError("FAILED TO GET \(key) from configuration files!")
-        }
-        
-        return token!
-    }
-    
-    internal static func postJSON(post: Post) -> [String: Any] {
-        var buttons: [[String: String]]? = nil
-        if let title = post.buttons.keys.first, let link = post.buttons[title] {
-            buttons = [["type": "web_url",
-                        "url": link,
-                        "title": title]]
-        }
-        
-        return ["title": post.title,
-                "subtitle": post.subTitle ?? "",
-                "buttons": buttons ?? [],
-                "image_url": post.attachment]
-    }
-    
-    internal static func talentJSON(talent: Talent) -> [String: Any] {
-        let payload = "\(POSTBACK_TALENT_CHOOSE)|\(talent.id?.string ?? "0")"
-        let buttons = [postbackButtonFor(title: "Subscribe", payload: payload)]
-        
-        return ["title": talent.name,
-                "subtitle": talent.description,
-                "buttons": buttons,
-                "image_url": talent.imageUrl]
-    }
-    
+public class MessengerHelper {
     public static func postbackButtonFor(title: String, payload: String) -> [String: Any] {
         return ["type": "postback", "title": title, "payload": payload]
     }
