@@ -3,9 +3,9 @@
 import PackageDescription
 
 let package = Package(
-    name: "SwiftMessengerWrappers",
+    name: "MessengerWrappers",
     products: [
-        .library(name: "SwiftMessengerWrappers", targets: ["SwiftMessengerWrappers"])
+        .library(name: "MessengerWrappers", targets: ["MessengerWrappers"])
     ],
     dependencies: [
         .package(url: "https://github.com/vapor/vapor.git", .upToNextMajor(from: "2.1.0")),
@@ -14,7 +14,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "SwiftMessengerWrappers",
+            name: "MessengerWrappers",
             dependencies: ["Vapor", "Jay"]
         )
     ]
