@@ -15,6 +15,20 @@ public class MessengerHelper {
         ]
     }
     
+    public static func uploadImageMessage(url: String) -> [String: Any] {
+        return [
+            "message": [
+                "attachment":[
+                    "type":"image",
+                    "payload":
+                        ["is_reusable": true,
+                         "url": url
+                    ]
+                ]
+            ]
+        ]
+    }
+
     public static func genericAttachment(type: String, url: String) -> [String: Any] {
         return [
             "type":type,
