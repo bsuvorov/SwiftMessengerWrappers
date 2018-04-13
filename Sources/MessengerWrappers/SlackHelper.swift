@@ -17,7 +17,7 @@ public class SlackHelper {
         self.client = client
     }
     
-    func sendTextToSlack(_ text: String, host: String) {
+    public func sendTextToSlack(_ text: String, host: String) {
         let slackHeaders: [HeaderKey: String] = [
             "Content-Type": "application/json; charset=UTF-8"
         ]
@@ -26,7 +26,7 @@ public class SlackHelper {
         self.asyncPostRequestTo(host: host, headers: slackHeaders, body: body)
     }
     
-    func sendFileToSlack(content: String,
+    public func sendFileToSlack(content: String,
                          token: String,
                          channels: String,
                          filetype: String,
