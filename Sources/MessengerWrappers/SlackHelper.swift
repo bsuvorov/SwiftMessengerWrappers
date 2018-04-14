@@ -8,6 +8,7 @@
 import Foundation
 import Vapor
 import HTTP
+import Dispatch
 
 public class SlackHelper {
     
