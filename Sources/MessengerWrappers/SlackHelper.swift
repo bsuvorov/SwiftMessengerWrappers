@@ -18,20 +18,25 @@ public class SlackHelper {
         self.client = client
     }
     
-    public func sendTextToSlack(_ text: String, host: String) {
+    public func sendTextToSlack(_ text: String, host: String, sync: Bool = false) {
         let slackHeaders: [HeaderKey: String] = [
             "Content-Type": "application/json; charset=UTF-8"
         ]
         let body = "{\"text\":\"\(text)\"}".makeBody()
         
-        self.asyncPostRequestTo(host: host, headers: slackHeaders, body: body)
+        if sync {
+            self.syncPostRequestTo(host: host, headers: slackHeaders, body: body)
+        } else {
+            self.asyncPostRequestTo(host: host, headers: slackHeaders, body: body)
+        }
     }
     
     public func sendFileToSlack(content: String,
                          token: String,
                          channels: String,
                          filetype: String,
-                         filename: String){
+                         filename: String,
+                         sync: Bool = false) {
         let boundary = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
         let host = "https://slack.com/api/files.upload"
         let slackHeaders: [HeaderKey: String] = [
@@ -46,7 +51,12 @@ public class SlackHelper {
         ]
         let body = self.createMultipartFormBody(with: parameters, boundary: boundary)
         
-        self.asyncPostRequestTo(host: host, headers: slackHeaders, body: body)
+        if sync {
+            self.syncPostRequestTo(host: host, headers: slackHeaders, body: body)
+
+        } else {
+            self.asyncPostRequestTo(host: host, headers: slackHeaders, body: body)
+        }
     }
     
     @discardableResult
